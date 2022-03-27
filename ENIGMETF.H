@@ -1,4 +1,4 @@
-#Lindef ENIGMETF_H_INCLUDED
+#ifndef ENIGMETF_H_INCLUDED
 #define ENIGMETF_H_INCLUDED
 #include <stato- hz
 #include <stdlib.h>
