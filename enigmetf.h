@@ -2,8 +2,8 @@
 #define enigmetf_h_INCLUDED
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL/SDL. h>
-#include <SDL/SOL_image. h>
+#include <SDL/SDL.h>
+#include <SDL/SOL_image.h>
 #include <SDL/SOL_ttf.h>
 #include <time_h>
 
