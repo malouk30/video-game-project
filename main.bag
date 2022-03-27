@@ -1,0 +1,79 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+#include "background.h"
+
+int main (void)
+{
+    int continuer=1;
+    int direction;
+    int volume ;
+    background b;
+
+    SDL_Surface *ecran=NULL;
+    SDL_Init(SDL_INIT_EVERYTHING);
+    ecran= SDL_SetVideoMode(SCREEN_W, SCREEN_H,32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+if(Mix_OpenAudio(1366, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 678) == -1) //Initialisation de l'API Mixer
+   {
+      printf("%s", Mix_GetError());
+   }
+    SDL_WM_SetCaption("in the village", NULL);
+
+    SDL_Event event;
+    SDL_EnableKeyRepeat(10,10);	
+	
+
+
+initBack(&b);
+initBack2(&b);
+while (continuer)
+{
+afficheBack(b,ecran);
+afficheBack2(b,ecran);
+        while (SDL_PollEvent(&event)){
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+                break;
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym)
+                {
+                        case SDLK_RIGHT:
+            scrolling(&b,0);
+                        break;
+                        case SDLK_LEFT:
+            scrolling(&b,1);
+                        break;
+ 			case SDLK_DOWN:
+            scrolling(&b,2);
+
+                        break;
+ 			case SDLK_UP:
+            scrolling(&b,3);
+                        break;
+                        case SDLK_d:
+            scrolling(&b,4);
+                        break;
+                        case SDLK_q:
+            scrolling(&b,7);
+                        break;
+ 			case SDLK_s:
+            scrolling(&b,8);
+
+                        break;
+ 			case SDLK_z:
+            scrolling(&b,9);
+                        break;
+                }
+                break;
+       }
+}
+SDL_Flip(ecran);
+}
+//SDL_FreeSurface(b->imgback);
+SDL_Quit();
+return EXIT_SUCCESS;
+}
