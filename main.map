@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
+#include "header.h"
+
+int main(void)
+{
+minimap m;
+Personne p;
+
+SDL_Surface *screen = NULL;
+SDL_Rect position_camera;
+
+screen = SDL_SetVideoMode(1600, 800, 32, SDL_SWSURFACE | SDL_DOUBLEBUF);
+    //dimension background            //dimension minimap
+int longueurM = 8000, largeurM = 800, longueur = 800, largeur = 80;
+int redimensionnement =  distance * longueur / longueurM;
+
+int continuer = 1;
+
+initmap(&m);
+while (continuer)
+    {
+        afficherminimap(m, screen);
+    while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                continuer = 0;
+                break;
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_ESCAPE:
+                    continuer = 0;
+                    break;
+                case SDLK_RIGHT:
+                    position_camera.x=0;
+                    majminimap(&p,&m,position_camera,redimensionnement);
+                    break;
+                case SDLK_LEFT:
+                    position_camera.x=1;
+                    majminimap(&p,&m,position_camera,redimensionnement);
+                break;
+                case SDLK_DOWN:
+                    position_camera.x=2;
+                    majminimap(&p,&m,position_camera,redimensionnement);
+                    break;
+                case SDLK_UP:
+                    //position camera mini map
+                    position_camera.x=3;
+                    majminimap(&p,&m,position_camera,redimensionnement);
+                    break;
+                }
+            }
+        }
+        SDL_Flip(screen);
+    }
+    SDL_Quit();
+    return EXIT_SUCCESS;
+}
