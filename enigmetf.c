@@ -336,3 +336,35 @@ break ;
 }
 SDL_Delay(100);
 }
+void verify_enigma (nigmetf *e, SDL_Surface*ecran) {
+	
+		SDL_Rect pos={160, 330};
+	if(e->positionVraiReponse==e->pos_selected)
+	{
+		printf( "You win\n");
+		SDL_Surface *win;
+		win=IMG_Load("img/youwin . png");
+		SDL_BlitSurface(win, NULL, ecran, &pos);
+		SDL_Flip(ecran) ;
+	}
+	else
+	{
+		SDL_Surface *lost;
+		lost=IMG_Load("img/youlost. png");
+		SDL_BlitSurface(lost, NULL, ecran, &pos);
+		SDL_Flip(ecran);
+		printf( "You lost\n");
+	}
+	SDL_Delay (2000);
+	}
+	
+	void free_Surface_enigma (enigmatf e) 
+	{
+		SDL_FreeSurface(e .background) ;
+		SDL_FreeSurface(e.question);
+		SDL_FreeSurface(e.reponses [0]) ;
+		SDL_FreeSurface(e.reponses [1]) ;
+		SDL_FreeSurface(e.reponses [2]) ;
+		SDL_FreeSurface(e.button);
+		SDI_ FreeSurface(e.button_s);
+	}
