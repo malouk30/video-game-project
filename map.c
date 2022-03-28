@@ -3,22 +3,21 @@
 void initmap(minimap *m)
 {
     m->map = IMG_Load("minimap1.png");
-    //position minimap
     m->pos_map.x = 0;
     m->pos_map.y = 0;
 }
 
 void majminimap(Personne *p, minimap *m ,SDL_Rect camera ,int redimensionnement){
-  if (camera.x==0)//right
+  if (camera.x==0)
   p->pos_perso.x += redimensionnement;
 
-  if (camera.x==1)//left
+  if (camera.x==0)
   p->pos_perso.x -= redimensionnement;
 
-  if (camera.x==2)//down
+  if (camera.x==2)
   p->pos_perso.y += redimensionnement;
 
-  if (camera.x==3)//up
+  if (camera.x==3)
   p->pos_perso.y -= redimensionnement;
 }
 
