@@ -7,18 +7,39 @@ void initmap(minimap *m)
     m->pos_map.y = 0;
 }
 
-void majminimap(Personne *p, minimap *m ,SDL_Rect camera ,int redimensionnement){
-  if (camera.x==0)
-  p->pos_perso.x += redimensionnement;
+void maj_camera_perso(INPUT input, SDL_Rect* position_perso,SDL_Rect* position_camera)
+{
 
-  if (camera.x==0)
-  p->pos_perso.x -= redimensionnement;
+    if (input.clavier.right)
+    {
+        position_perso.x += 10;
+        position_camera.y += 10;
+    }
+    else
+        if(input.clavier.left)
+    {
+        position_perso.x -= 10;
+        position_camera.y -= 10;
+    }
+    if (input.clavier.up)
+    {
+        position_perso.x += 10;
+        position_camera.y += 10;
+    }
+     else
+        if(input.clavier.down)
+    {
+        position_perso.x -= 10;
+        position_camera.y -= 10;
+    }
+}
 
-  if (camera.x==2)
-  p->pos_perso.y += redimensionnement;
 
-  if (camera.x==3)
-  p->pos_perso.y -= redimensionnement;
+void majminimap(SDL_Rect position_perso, minimap *m ,SDL_Rect camera ,int redimensionnement){
+
+  pos_miniPerso.x = position_perso.x * redimensionnement/100;
+  pos_miniPerso.y = position_perso.y * redimensionnement/100;
+
 }
 
 void afficherminimap(minimap m, SDL_Surface *screen)
