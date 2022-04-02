@@ -16,15 +16,23 @@ SDL_Rect position_camera;
 
 screen = SDL_SetVideoMode(1600, 800, 32, SDL_SWSURFACE | SDL_DOUBLEBUF);
 int longueurM = 8000, largeurM = 800, longueur = 800, largeur = 80;
-int redimensionnement =  distance * longueur / longueurM;
+int redimensionnement =  distance * longueur / longueurM; ///constante (globale) à fixer dans un fichier .h commun à part
 
 int continuer = 1;
 
+
+intit_input(&input);
 initmap(&m);
+
 while (continuer)
     {
         afficherminimap(m, screen);
-    while (SDL_PollEvent(&event))
+        
+        input = getinput(&continuer);
+        maj_camera_perso(input, &position_perso,&position_camera); // simulation à enlever dans l'intégration
+        majminimap(position_perso, position_camera, &m,,redimensionnement);
+        
+   /*if (SDL_PollEvent(&event)) //a migrer dans getinput
         {
             switch (event.type)
             {
@@ -38,7 +46,11 @@ while (continuer)
                     continuer = 0;
                     break;
                 case SDLK_RIGHT:
-                    position_camera.x=0;
+                    input.clavier.right = 1;
+                    
+                    
+                    
+                    position_camera.x=0; // à migrer dans maj()
                     majminimap(&p,&m,position_camera,redimensionnement);
                     break;
                 case SDLK_LEFT:
@@ -56,6 +68,8 @@ while (continuer)
                 }
             }
         }
+        
+        */
         SDL_Flip(screen);
     }
     SDL_Quit();
