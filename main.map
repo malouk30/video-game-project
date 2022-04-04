@@ -16,7 +16,7 @@ SDL_Rect position_camera;
 
 screen = SDL_SetVideoMode(1600, 800, 32, SDL_SWSURFACE | SDL_DOUBLEBUF);
 int longueurM = 8000, largeurM = 800, longueur = 800, largeur = 80;
-int redimensionnement =  distance * longueur / longueurM; ///constante (globale) à fixer dans un fichier .h commun à part
+int redimensionnement =  distance * longueur / longueurM; 
 
 int continuer = 1;
 
