@@ -69,7 +69,7 @@ void afficher_temps(temps *t,SDL_Surface *screen)
 
  int continuer = 1;
 
-TTF_Font *police = NULL;//
+TTF_Font *police = NULL;
 
 
  SDL_Event event;
