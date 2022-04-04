@@ -7,34 +7,24 @@
 #include <SDL/SOL_ttf.h>
 #include <time_h>
 
-typedef struct{
-SDL_Surface *background; // le background sur lequel je vais afficher la question et les reponses
-SDL_Surface *question; // la surface sur laquelle je vais afficher la question
-SDL_Surface *reponses[4]; // la surface sur laquelle je vais afficher les reponses
-SDL_Surface *button; // le boutton sur lequel je vais cliquer
-SDL_Surface *button_s; // boutton selectionné
+typedef struct
+{
+	int resultat;
+	SDL_Surface *youwin,*youlost;
+	SDL_Rect position_youwin,position_youlost;
 
-int pos_selected; // 1 2 3
-SDL_Rect pos_question; // position de 1a question
-SDL_Rect pos_reponse1; // positton de la reponse
-SDL_Rect pos_reponse2;     //        //
-SDL_Rect pos_reponse3;    //        //
-int num_question; //  1 2 3 
- 
-SDL_Rect pos_reponseltxt; // la pos du txt que je vais mettre sur l img de la rep
-SDL_Rect pos_reponse2txt;         //        //
-SDL_Rect pos_reponse3txt;       
-int vrat_reponse; // 1 2 3
-int positionVraiReponse; // la pos de la vraie rep ( pos du txt et img )
-TF_Font *police;
-TTF_Font *police1;
+	TTF_Font *police,*police1;
+	SDL_Surface *reponse_1,*reponse_2,*reponse_3,*question;
+	SDL_Rect  pos_reponse_1,pos_reponse_2,pos_reponse_3,pos_question;
+	int alea;
+	
+}enigmetf;
 
-} entgmetf;
-void InitEnigme (enigmetf *e, char *nomfichter[] );
-void afficherEnigme (enigmetf e, SDL_Surface *ecran);
-void verify_enigme (enigmetf *e, SDL_Surface*ecran);
-void animer (enigmetf *e);
-void free_Surface_entgme (enigmetf e);
+
+void alea_enigme(enigme *e);
+void init_enigme( enigme *e,char *nomfichier);
+void blit_enigme( enigme *e, SDL_Surface* screen);
+void free_enigme( enigme *e);
 
  #endif
  
