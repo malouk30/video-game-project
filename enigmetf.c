@@ -2,8 +2,6 @@
 void init_enigme( enigme *e ,char *nomfichier)
 {
    e->background= IMG_Load("img/background.png") ;
-   e->button= IMG_Load("img/button.png");
-   e->button_s= IMG_Load("img/button_s.png");
 
 	TTF_Init( ) ;
 	SDL_Color couleur = {0,0,0};
