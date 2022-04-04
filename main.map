@@ -29,10 +29,10 @@ while (continuer)
         afficherminimap(m, screen);
         
         input = getinput(&continuer);
-        maj_camera_perso(input, &position_perso,&position_camera); // simulation à enlever dans l'intégration
+        maj_camera_perso(input, &position_perso,&position_camera);
         majminimap(position_perso, position_camera, &m,,redimensionnement);
         
-   /*if (SDL_PollEvent(&event)) //a migrer dans getinput
+   /*if (SDL_PollEvent(&event)) 
         {
             switch (event.type)
             {
@@ -50,7 +50,7 @@ while (continuer)
                     
                     
                     
-                    position_camera.x=0; // à migrer dans maj()
+                    position_camera.x=0; 
                     majminimap(&p,&m,position_camera,redimensionnement);
                     break;
                 case SDLK_LEFT:
