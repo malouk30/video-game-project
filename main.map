@@ -1,42 +1,40 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_ttf.h>
+#include<stdio.h>
+#include<SDL/SDL.h>
+#include<SDL/SDL_image.h>
+#include<SDL/SDL_mixer.h>
+#include<SDL/SDL_ttf.h>
 #include "header.h"
 
-int main(void)
-{
-minimap m;
-Personne p;
+int main(void){
+int continuer=1;
+SDL_Surface *screen,*backg;
+map m;
+Time temps;
+SDL_Event event;
+SDL_Rect position_camera,pos_backg;
+int longueurM = 8000, largeurM = 800, longueur = 800, largeur = 80,distance = 100;
+int redimensionnement =  distance * longueur / longueurM;
 
-SDL_Surface *screen = NULL;
-SDL_Rect position_camera;
+backg=IMG_Load("background.jpg");
+	pos_backg.x=0;
+	pos_backg.y=0;
+	
+screen=SDL_SetVideoMode(1366,678,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 
-screen = SDL_SetVideoMode(1600, 800, 32, SDL_SWSURFACE | SDL_DOUBLEBUF);
-int longueurM = 8000, largeurM = 800, longueur = 800, largeur = 80;
-int redimensionnement =  distance * longueur / longueurM; 
+initminimap(&m,screen);
+inittemps(&temps);
 
-int continuer = 1;
-
-
-intit_input(&input);
-initmap(&m);
-
-while (continuer)
+ while (continuer)
     {
-        afficherminimap(m, screen);
-        
-        input = getinput(&continuer);
-        maj_camera_perso(input, &position_perso,&position_camera);
-        majminimap(position_perso, position_camera, &m,,redimensionnement);
-        
-   /*if (SDL_PollEvent(&event)) 
+    SDL_BlitSurface(backg,NULL,screen,&pos_backg);
+    afficherminimap(&m,screen);
+    update_time(&temps);
+    displaytime(temps,screen);
+    
+	SDL_PollEvent(&event);
+	switch(event.type)
         {
-            switch (event.type)
-            {
-            case SDL_QUIT:
+        case SDL_QUIT:
                 continuer = 0;
                 break;
             case SDL_KEYDOWN:
@@ -46,32 +44,22 @@ while (continuer)
                     continuer = 0;
                     break;
                 case SDLK_RIGHT:
-                    input.clavier.right = 1;
-                    
-                    
-                    
-                    position_camera.x=0; 
-                    majminimap(&p,&m,position_camera,redimensionnement);
+                        MAJminimap(&m,position_camera,redimensionnement);
                     break;
                 case SDLK_LEFT:
-                    position_camera.x=1;
-                    majminimap(&p,&m,position_camera,redimensionnement);
+                        MAJminimap(&m,position_camera,redimensionnement);
                 break;
-                case SDLK_DOWN:
-                    position_camera.x=2;
-                    majminimap(&p,&m,position_camera,redimensionnement);
+                    case SDLK_DOWN:
+                        MAJminimap(&m,position_camera,redimensionnement);
                     break;
                 case SDLK_UP:
-                    position_camera.x=3;
-                    majminimap(&p,&m,position_camera,redimensionnement);
-                    break;
-                }
-            }
+                        MAJminimap(&m,position_camera,redimensionnement);
+                    break; 
+            	}
         }
-        
-        */
         SDL_Flip(screen);
     }
-    SDL_Quit();
-    return EXIT_SUCCESS;
+TTF_Quit();
+SDL_Quit();
+return EXIT_SUCCESS;      
 }
