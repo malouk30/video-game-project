@@ -39,11 +39,11 @@ void afficherminimap(map *m,SDL_Surface *screen);
 void sauvegarde_score(int score);
 void sauvegarde_nom (char nom[]);
 int score();
-void inittemps(Time *t);// initialisaton lel temps l koulo 
-void Timer(int *tempsdebut);// tehseb l temps 
-int initTexttime(Text* T);//initialisation du text  khw eli besh nektbo bih
-int loadFonttime(Text* T, char* angelina);//tloadi l font mtaa l text
-void update_time(Time* T);//mise a jour du temps 
-void displaytime(Time T,SDL_Surface *screen);//afficher le temps aal back
+void inittemps(Time *t);
+void Timer(int *tempsdebut);
+int initTexttime(Text* T);
+int loadFonttime(Text* T, char* angelina);
+void update_time(Time* T);
+void displaytime(Time T,SDL_Surface *screen);
 
 #endif
