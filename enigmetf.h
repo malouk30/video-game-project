@@ -1,30 +1,52 @@
-#ifndef enigmetf_h_INCLUDED
-#define enigmetf_h_INCLUDED
-#include <stdio.h>
+#ifndef ENIGMETF_H_INCLUDED
+#define ENIGMETF_H_INCLUDED
+
+#include <stdio.h> 
 #include <stdlib.h>
 #include <SDL/SDL.h>
-#include <SDL/SOL_image.h>
-#include <SDL/SOL_ttf.h>
-#include <time_h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include <time.h>
 
-typedef struct
-{
-	int resultat;
-	SDL_Surface *youwin,*youlost;
-	SDL_Rect position_youwin,position_youlost;
+typedef struct{//type define structure 
 
-	TTF_Font *police,*police1;
-	SDL_Surface *reponse_1,*reponse_2,*reponse_3,*question;
-	SDL_Rect  pos_reponse_1,pos_reponse_2,pos_reponse_3,pos_question;
-	int alea;
+	SDL_Surface *background;// l background ali besh nafficher fiha l question o les reponses 
+	SDL_Surface *question;//l surface ali besh nafficher feha l question 
+	SDL_Surface *reponses[3];//l surface ali besh nafficher feha les reponses 
+	SDL_Surface *button;// l button ali besh nenzl alih 
+	SDL_Surface *button_s;
+
+	int pos_selected;// 1 2 3 
+	SDL_Rect pos_question;// l position mta3 l question 
+	SDL_Rect pos_reponse1;// l position mta3 lreponse
+	SDL_Rect pos_reponse2;// l position mta3 l reponse 
+	SDL_Rect pos_reponse3;// l position mta3 l reponse 
+	int num_question;
 	
+	SDL_Rect pos_reponse1txt;// l position mta3 l txt ali besh nhoto fouk l image ta3 l reponse 
+	SDL_Rect pos_reponse2txt;// l position mta3 l txt ali besh nhoto fouk l image ta3 l reponse 
+	SDL_Rect pos_reponse3txt;// l position mta3 l txt ali besh nhoto fouk l image ta3 l reponse 
+	int vrai_reponse;// l reponse l s7i7a yam loula wala l thenya wala l theltha 
+	int positionVraiReponse;// l position mta3 l reponse l s7i7a o ali heya l position mta3 l image wel texte  
+	TTF_Font *police; 
+	TTF_Font *police1;
+	
+		
+	SDL_Surface *image_clock;  
+	SDL_Rect pos_image_clock;
+	
+	SDL_Rect single_Clock;
+	
+	
+	int clock_num;
+
 }enigmetf;
 
+void InitEnigme(enigmetf *e,char *nomfichier[]);
+void afficherEnigme(enigmetf e,SDL_Surface *ecran);
+void displayClock(enigmetf e,SDL_Surface *ecran);
+void verify_enigme(enigmetf *e,SDL_Surface*ecran);
+void animer(enigmetf *e);
+void free_Surface_enigme(enigmetf e);
 
-void alea_enigme(enigme *e);
-void init_enigme( enigme *e,char *nomfichier);
-void blit_enigme( enigme *e, SDL_Surface* screen);
-void free_enigme( enigme *e);
-
- #endif
- 
+#endif
